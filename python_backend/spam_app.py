@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from keras.models import load_model
 from lime.lime_text import LimeTextExplainer
@@ -6,7 +7,6 @@ import pickle
 import numpy as np
 import os
 import sys
-
 import nltk
 
 nltk.download('punkt')
@@ -30,7 +30,15 @@ app = FastAPI(
     description="API untuk mendeteksi apakah pesan atau teks yang diberikan merupakan spam atau tidak.",
 )
 
-# Pastikan path file model benar relatif terhadap file ini
+# Tambahkan middleware CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Mengizinkan semua origin
+    allow_credentials=True,
+    allow_methods=["*"],  # Mengizinkan semua metode HTTP (GET, POST, dll.)
+    allow_headers=["*"],  # Mengizinkan semua headers
+)
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model", "model_spam.h5")
 VECTORIZER_PATH = os.path.join(BASE_DIR, "model", "tfidf_vectorizer.pkl")
