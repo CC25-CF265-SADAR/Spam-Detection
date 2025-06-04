@@ -7,7 +7,11 @@ import numpy as np
 import os
 import sys
 
-# Tambahkan path agar bisa akses utils saat dijalankan dari luar
+import nltk
+
+nltk.download('punkt')
+nltk.download('stopwords')
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Import dari modul lokal
