@@ -25,7 +25,10 @@ from python_backend.utils.spam_rule_based_filter import rule_based_spam_filter
 from python_backend.utils.spam_predict_and_explain import predict_and_explain_spam
 
 # Inisialisasi FastAPI
-app = FastAPI()
+app = FastAPI(
+    title="Spam Detection API",
+    description="API untuk mendeteksi apakah pesan atau teks yang diberikan merupakan spam atau tidak.",
+)
 
 # Pastikan path file model benar relatif terhadap file ini
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -43,7 +46,7 @@ explainer = LimeTextExplainer(class_names=['Not SPAM', 'SPAM'])
 class TextInput(BaseModel):
     text: str
 
-@app.post("/predict")
+@app.post("/predict", tags=["Spam Detection"], summary="Deteksi apakah pesan merupakan spam atau tidak")
 async def predict(input_data: TextInput):
     text = input_data.text
     pred_class, prob, explanation, source = predict_and_explain_spam(
