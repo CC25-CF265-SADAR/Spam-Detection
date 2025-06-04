@@ -1,7 +1,7 @@
-from utils.spam_rule_based_filter import rule_based_spam_filter
+from python_backend.utils.spam_rule_based_filter import rule_based_spam_filter
 import numpy as np
-from utils.spam_preprocess_text import preprocess_text
-from utils.spam_predictor import predictor
+from python_backend.utils.spam_preprocess_text import preprocess_text
+from python_backend.utils.spam_predictor import predictor
 
 def predict_and_explain_spam(text, model, vectorizer, explainer, class_names, num_features=5):
     """
