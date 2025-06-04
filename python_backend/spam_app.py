@@ -6,10 +6,10 @@ import pickle
 import numpy as np
 from keras.models import load_model
 from lime.lime_text import LimeTextExplainer
-from utils.spam_preprocess_text import cleaning, casefolding, handle_slangwords, tokenizing, remove_stopwords, text_result, preprocess_text
-from utils.spam_predictor import predictor
-from utils.spam_rule_based_filter import rule_based_spam_filter
-from utils.spam_predict_and_explain import predict_and_explain_spam
+from python_backend.utils.spam_preprocess_text import cleaning, casefolding, handle_slangwords, tokenizing, remove_stopwords, text_result, preprocess_text
+from python_backend.utils.spam_predictor import predictor
+from python_backend.utils.spam_rule_based_filter import rule_based_spam_filter
+from python_backend.utils.spam_predict_and_explain import predict_and_explain_spam
 
 import os
 import sys
