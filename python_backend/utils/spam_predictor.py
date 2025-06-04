@@ -1,4 +1,4 @@
-from utils.spam_preprocess_text import preprocess_text
+from python_backend.utils.spam_preprocess_text import preprocess_text
 
 def predictor(texts, model, vectorizer):
     """
