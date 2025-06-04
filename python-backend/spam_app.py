@@ -11,6 +11,10 @@ from utils.spam_predictor import predictor
 from utils.spam_rule_based_filter import rule_based_spam_filter
 from utils.spam_predict_and_explain import predict_and_explain_spam
 
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 # Inisialisasi FastAPI
 app = FastAPI()
 
