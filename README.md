@@ -130,5 +130,29 @@ API ini juga dapat diakses pada url https://spam-detection-sadar.up.railway.app
 
 ## Struktur Proyek
 ```plaintext
-
+.
+├── dataset/
+│   ├── data_dummy.csv         # Data sintetis
+│   └── spam.csv               # Dataset utama untuk training
+│
+├── python_backend/
+│   ├── model/
+│   │   ├── model_spam.h5          # File model Keras/TensorFlow yang sudah dilatih
+│   │   └── tfidf_vectorizer.pkl   # File TF-IDF Vectorizer yang disimpan
+│   │
+│   ├── utils/
+│   │   ├── spam_predict_and_explain.py  # Logika untuk prediksi dan penjelasan LIME
+│   │   ├── spam_predictor.py          # Logika inti untuk melakukan prediksi
+│   │   ├── spam_preprocess_text.py    # Fungsi untuk pra-pemrosesan teks
+│   │   └── spam_rule_based_filter.py  # Filter berbasis aturan sebelum prediksi model
+│   │
+│   ├── Dockerfile             # Konfigurasi untuk membangun image Docker
+│   ├── spam_app.py            # Aplikasi utama FastAPI (entrypoint)
+│   └── __init__.py
+│
+├── Generate_Data_Dummy.ipynb    # Notebook untuk membuat data dummy
+├── inference_model.ipynb        # Notebook untuk menguji inferensi model
+├── model_spam_training.ipynb    # Notebook untuk proses training model spam
+├── .gitignore                   # Daftar file yang diabaikan oleh Git
+└── README.md                    # File dokumentasi
 ```
