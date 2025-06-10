@@ -10,7 +10,6 @@ Repositori ini berisi proyek deteksi spam berbasis teks yang dikembangkan oleh T
 - [Menjalankan Aplikasi](#menjalankan-aplikasi)
 - [Endpoint API](#endpoint-api)
 - [Struktur Proyek](#struktur-proyek)
-- [Deployment](#deployment)
 
 ## Fitur
 - Deteksi spam teks dengan model RNN.
@@ -54,7 +53,7 @@ cd Spam-Detection
 ```
 ### 2. Buat Lingkungan Virtual
 Sangat disarankan untuk membuat lingkungan virtual agar dependensi proyek tidak bercampur dengan instalasi Python global.
-```plaintext
+```bash
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
@@ -62,7 +61,7 @@ venv\Scripts\activate     # Windows
 
 ### 3. Instalasi Dependensi
 Instal semua pustaka Python yang diperlukan yang tercantum dalam file requirements.txt.
-```plaintext
+```bash
 pip install -r requirements.txt
 ```
 
@@ -70,25 +69,66 @@ pip install -r requirements.txt
 Setelah semua dependensi terinstal, jalankan server aplikasi menggunakan Uvicorn.
 ### 1. Jalankan Server
 Dari direktori utama proyek, jalankan perintah berikut di terminal:
-```plaintext
+```bash
 uvicorn python_backend.spam_app:app --reload --port 8000
 ```
 ### 2. Akses Aplikasi
-Setelah server berjalan, Anda dapat mengakses dokumentasi API interaktif (Swagger UI) melalui browser di alamat: http://127.0.0.1:8080/docs.
+Setelah server berjalan, Anda dapat mengakses dokumentasi API interaktif (Swagger UI) melalui browser di alamat: http://127.0.0.1:8000/docs.
 
 ## Endpoint API 
 Aplikasi menyediakan endpoint utama untuk melakukan prediksi pesan spam melalui metode POST.
 
 Endpoint
-URL: /predict
-Metode: POST
-Content-Type: application/json
+- URL: /predict
+- Metode: POST
+- Content-Type: application/json
 
-API ini juga telah tersedia secara publik pada url https://spam-detection-sadar.up.railway.app
+### Contoh Request Body
+```json
+{
+  "text": "string"
+}
+```
+
+### Contoh Permintaan dengan cURL
+```bash
+curl -X 'POST' \
+  'http://127.0.0.1:8000/predict' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "text": "Selamat Anda memenangkan hadiah undian sebesar 100jt! Klik link ini sekarang juga!"
+}'
+```
+
+### Contoh Respon Sukses
+```json
+{
+  "prediction": "SPAM",
+  "probability": 0.9898,
+  "explanation": [
+    [
+      "hadiah",
+      0.18142061745162197
+    ],
+    [
+      "Klik",
+      0.17899795933406748
+    ],
+    [
+      "undian",
+      0.1602814598329613
+    ]
+  ],
+  "source": "Model"
+}
+
+```
+> Nilai probability menunjukkan kemungkinan bahwa pesan tersebut adalah spam (semakin mendekati 1, semakin berisiko).
+
+API ini juga dapat diakses pada url https://spam-detection-sadar.up.railway.app
 
 ## Struktur Proyek
 ```plaintext
 
 ```
-
-## Deployment
